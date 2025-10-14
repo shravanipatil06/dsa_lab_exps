@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+// Function for Binary Search
+int binarySearch(int bookIDs[], int n, int key) {
+    int low = 0, high = n - 1, mid;
+    while (low <= high) {
+        mid = (low + high) / 2;
+
+        if (bookIDs[mid] == key)
+            return mid; // Book found
+        else if (bookIDs[mid] < key)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1; // Book not found
+}
+
+int main() {
+    int bookIDs[] = {41, 82, 123, 164, 205, 246, 287}; // Sorted Book IDs
+    int n = sizeof(bookIDs) / sizeof(bookIDs[0]);
+    int key, result;
+
+    printf("===== Library Book Search System =====\n");
+    printf("Available Book IDs (sorted):\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", bookIDs[i]);
+    }
+
+    printf("\n\nEnter Book ID to search: ");
+    scanf("%d", &key);
+
+    result = binarySearch(bookIDs, n, key);
+
+    if (result != -1)
+        printf("\nBook Found! Book ID %d is available at position %d.\n", key, result + 1);
+    else
+        printf("\nSorry! Book with ID %d is not available in the library.\n", key);
+
+    return 0;
+}
